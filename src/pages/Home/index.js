@@ -4,7 +4,7 @@ import { MdAddShoppingCart } from 'react-icons/md';
 import { formatPrice } from '../../utils/format';
 import { ProductList } from './styles';
 
-import { addToCart } from '../../store/modules/cart/actions';
+import { addToCartRequest } from '../../store/modules/cart/actions';
 
 import api from '../../services/api';
 
@@ -34,8 +34,8 @@ export default function Home() {
     getProducts();
   }, []);
 
-  function handleAddProduct(product) {
-    dispatch(addToCart(product));
+  function handleAddProduct(id) {
+    dispatch(addToCartRequest(id));
   }
 
   return (
@@ -46,7 +46,7 @@ export default function Home() {
           <strong>{product.title}</strong>
           <span>{product.priceFmt}</span>
 
-          <button type="button" onClick={() => handleAddProduct(product)}>
+          <button type="button" onClick={() => handleAddProduct(product.id)}>
             <div>
               <MdAddShoppingCart size={16} color="#fff" />{' '}
               {amount[product.id] || 0}
